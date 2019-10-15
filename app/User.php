@@ -41,37 +41,44 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    const VERIFIED_USER = '1';
-    const UNVERIFIED_USER = '0';
+    const VERIFIED_USER = 'true';
+    const UNVERIFIED_USER = 'false';
 
     const ADMIN_USER = 'true';
     const REGULAR_USER = 'false';
 
-    public function setNameAttribute($name) {
+    public function setNameAttribute($name)
+    {
         $this->attributes['name'] = strtolower($name);
     }
 
-    public function getNameAttribute($name) {
+    public function getNameAttribute($name)
+    {
         return ucwords($name);
     }
 
-    public function setEmailAttribute($email) {
+    public function setEmailAttribute($email)
+    {
         $this->attributes['email'] = strtolower($email);
     }
 
-    public function getEmailAttribute($email) {
+    public function getEmailAttribute($email)
+    {
         return $email;
     }
 
-    public function isVerified() {
+    public function isVerified()
+    {
         return $this->verified == User::VERIFIED_USER;
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         return $this->admin == User::ADMIN_USER;
     }
 
-    public static function generateVerificationCode() {
+    public static function generateVerificationCode()
+    {
         return Str::Random(40);
     }
 }
